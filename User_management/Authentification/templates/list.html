@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+
+
+
+{% block content %}
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">name</th>
+        <th scope="col">email</th>
+        <th scope="col">role</th>
+        <th><a href="{%url 'register'%}" class="btn btn-outline-success" ;"><i class="fas fa-database"></i>Add New</a></th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for user in listuser %}
+      <tr>
+       
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+        <td>
+          <form action="{% url 'delete' user.id%}" method="POST">
+            {%csrf_token%}
+            <button class="btn" type="submit"><i class="fas fa-trash-alt"></i></button>
+          </form>
+          
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+{% endblock %}
